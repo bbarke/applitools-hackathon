@@ -41,7 +41,7 @@ public class VisualAITests extends BaseTest {
             new LoginScenario( "Both username and password", "username", "password", true,  null )
         );
 
-        Boolean success = true;
+        boolean success = true;
 
         for (LoginScenario scenario : loginScenarios) {
             loginPage.navToPage()

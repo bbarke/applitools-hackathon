@@ -31,7 +31,7 @@ public class BaseTest {
 
     private static void loadProperties() throws IOException {
         Properties properties = System.getProperties();
-        try (InputStream in = ClassLoader.class.getResourceAsStream("/test.properties")) {
+        try (InputStream in = BaseTest.class.getResourceAsStream("/test.properties")) {
             properties.load(in);
         }
     }

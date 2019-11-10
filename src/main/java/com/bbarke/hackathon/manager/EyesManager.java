@@ -8,7 +8,6 @@ import java.util.Objects;
 public class EyesManager implements Manager {
 
     private static Eyes eyes;
-    private static final String APP_NAME = "Hackathon Project";
     private EyesManager() {
         // Use getter
     }
@@ -38,7 +37,7 @@ public class EyesManager implements Manager {
      */
     private void openEyes(String testName) {
         if (!eyes.getIsOpen()) {
-            eyes.open(WebDriverManager.getManager().getDriver(), APP_NAME, testName);
+            eyes.open(WebDriverManager.getManager().getDriver(), "Hackathon Project", testName);
         }
     }
 

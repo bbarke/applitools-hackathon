@@ -3,7 +3,6 @@ package com.bbarke.hackathon;
 import com.bbarke.hackathon.model.Transaction;
 import com.bbarke.hackathon.page.LandingPage;
 import com.bbarke.hackathon.page.LoginPage;
-import com.google.common.collect.Comparators;
 import com.google.common.collect.Ordering;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
@@ -56,7 +55,7 @@ public class TraditionalTests extends BaseTest {
         Assert.assertEquals("The password placeholder is incorrect!", "Enter your password", passwordPlaceholder);
 
         // Check the 'Remember Me' label for the checkbox
-        // This would have been missed in v2
+        // This will pass against v2, and will not catch the extra space issue
         String rememberMe = loginPage.getRememberMeText();
         Assert.assertEquals("The Remember Me text is incorrect!", "Remember Me", rememberMe);
 
@@ -70,11 +69,11 @@ public class TraditionalTests extends BaseTest {
 
 
     /*
-    If you don’t enter the username and password and click the login button, it should throw an error
-    If you only enter the username and click the login button, it should throw an error
-    If you only enter the password and click the login button, it should throw an error
-    If you enter both username (any value) and password (any value), it should log you in.
-     */
+        If you don’t enter the username and password and click the login button, it should throw an error
+        If you only enter the username and click the login button, it should throw an error
+        If you only enter the password and click the login button, it should throw an error
+        If you enter both username (any value) and password (any value), it should log you in.
+    */
     @DataProvider
     public static Object[][] loginScenarios() {
         return new Object[][] {
@@ -121,7 +120,7 @@ public class TraditionalTests extends BaseTest {
 
         // Make sure it is sorted in desc order
         List<BigDecimal> amounts = afterSortTransactions.stream()
-                .map(aft -> aft.getAmount())
+                .map(Transaction::getAmount)
                 .collect(Collectors.toList());
         Assert.assertTrue("The sorted amount is not in the correct order!",
                 Ordering.<BigDecimal> natural().isOrdered(amounts));
@@ -132,13 +131,13 @@ public class TraditionalTests extends BaseTest {
     public void testCanvasChart() {
         loginPage.login();
         landingPage.clickCompareExpenses();
-        // I can't verify the canvas on this bar chart, Selenium can't select anything within that canvas
+        // I can't verify the canvas on this bar chart, There are no elements that can be selected within that canvas
     }
 
     @Test
     public void testCheckForAds() {
         loginPage.enableAds().login();
         List<String> ads = landingPage.getAds();
-        Assert.assertEquals("The wrong amont of ads are on the page!", 2, ads.size());
+        Assert.assertEquals("The wrong amount of ads are on the page!", 2, ads.size());
     }
 }
