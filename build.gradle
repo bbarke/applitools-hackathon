@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'com.bbarke.hackathon'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'com.tngtech.junit.dataprovider:junit4-dataprovider:2.6'
+    implementation 'com.applitools:eyes-selenium-java4:4.2.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'com.google.guava:guava:28.1-jre'
+}
